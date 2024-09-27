@@ -1,0 +1,92 @@
+syntax = "proto3";
+
+option csharp_namespace = "BankAccount.Grpc";
+
+service BankService {
+    // Customer-related services
+    rpc GetCustomer (CustomerRequest) returns (CustomerResponse);
+    rpc CreateCustomer (CreateCustomerRequest) returns (CustomerResponse);
+    
+    // Account-related services
+    rpc GetAccount (AccountRequest) returns (AccountResponse);
+    rpc GetAccountsByCustomer (AccountsByCustomerRequest) returns (AccountsResponse);
+    rpc CreateAccount (CreateAccountRequest) returns (AccountResponse);
+    
+    // Transaction-related services
+    rpc MakeTransaction (TransactionRequest) returns (TransactionResponse);
+    rpc GetTransactionHistory (TransactionHistoryRequest) returns (TransactionHistoryResponse);
+}
+
+// Messages for Customer
+message CustomerRequest {
+    int32 customerId = 1;
+}
+
+message CreateCustomerRequest {
+    string firstName = 1;
+    string lastName = 2;
+    string email = 3;
+    string phoneNumber = 4;
+    string dateOfBirth = 5; // ISO 8601 format (e.g., 1985-05-15)
+}
+
+message CustomerResponse {
+    int32 customerId = 1;
+    string firstName = 2;
+    string lastName = 3;
+    string email = 4;
+    string phoneNumber = 5;
+    string dateOfBirth = 6;
+}
+
+// Messages for Account
+message AccountRequest {
+    int32 accountId = 1;
+}
+
+message AccountsByCustomerRequest {
+    int32 customerId = 1;
+}
+
+message CreateAccountRequest {
+    int32 customerId = 1;
+    string accountType = 2;
+    string currency = 3;
+}
+
+message AccountResponse {
+    int32 accountId = 1;
+    int32 customerId = 2;
+    string accountType = 3;
+    string currency = 4;
+    float balance = 5;
+}
+
+// Multiple accounts response
+message AccountsResponse {
+    repeated AccountResponse accounts = 1;
+}
+
+// Messages for Transaction
+message TransactionRequest {
+    int32 accountId = 1;
+    string transactionType = 2; // Deposit or Withdrawal
+    float amount = 3;
+    string description = 4;
+}
+
+message TransactionResponse {
+    int32 transactionId = 1;
+    string transactionType = 2;
+    float amount = 3;
+    string description = 4;
+    string transactionDate = 5;
+}
+
+message TransactionHistoryRequest {
+    int32 accountId = 1;
+}
+
+message TransactionHistoryResponse {
+    repeated TransactionResponse transactions = 1;
+}
