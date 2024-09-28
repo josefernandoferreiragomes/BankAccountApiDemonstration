@@ -9,13 +9,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Protos\bank_service.proto" />
+    <Compile Remove="Generated\BankService.cs" />
+    <Compile Remove="Generated\BankServiceGrpc.cs" />
+    <Compile Remove="Generated\Greet.cs" />
+    <Compile Remove="Generated\GreetGrpc.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.28.2" />
-    <PackageReference Include="Grpc.AspNetCore" Version="2.57.0" />
-    <PackageReference Include="Grpc.Tools" Version="2.66.0">
+    <PackageReference Include="Google.Protobuf" Version="3.27.0" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.56.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.56.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -30,6 +33,10 @@
   <ItemGroup>
    <Protobuf Include="Protos\bank_service.proto" GrpcServices="Server" />
    <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <Folder Include="Generated\" />
   </ItemGroup>
 	
 </Project>
