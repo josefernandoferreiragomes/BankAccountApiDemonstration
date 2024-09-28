@@ -7,9 +7,9 @@ namespace BankAccount.WebAPI.DAL
 {
     public class BankAccountContext : DbContext
     {
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Account> Accounts { get; set; }
-        public DbSet<AccountTransaction> AccountTransactions { get; set; }
+        public DbSet<Customer> Customer { get; set; }
+        public DbSet<Account> Account { get; set; }
+        public DbSet<AccountTransaction> AccountTransaction { get; set; }
 
         public BankAccountContext(DbContextOptions<BankAccountContext> options) : base(options) { }
 

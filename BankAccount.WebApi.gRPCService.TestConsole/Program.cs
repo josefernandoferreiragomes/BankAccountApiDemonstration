@@ -8,11 +8,11 @@ Console.WriteLine("Hello, World! ... waiting for service to start...");
 
 Task.Delay(1000).Wait();
 
-Console.WriteLine("Press any key to continue...");
-Console.ReadKey();
+//Console.WriteLine("Press any key to continue...");
+//Console.ReadKey();
 
 // The port number must match the port of the gRPC server.
-using var channel = GrpcChannel.ForAddress("https://localhost:32769");
+using var channel = GrpcChannel.ForAddress("https://localhost:32779");
 var client = new Greeter.GreeterClient(channel);
 var reply = await client.SayHelloAsync(
                   new HelloRequest { Name = "GreeterClient" });

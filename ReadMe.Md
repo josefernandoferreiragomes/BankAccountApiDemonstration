@@ -47,6 +47,22 @@
 	```bash
 	install-package moq
 	```
+14. Configure sql server express
+	1. create user dockerUser mypass
+	2. Open SQL Server Configuration Manager and Enable TCP/IP in Server Network Configuration 
+	https://stackoverflow.com/questions/50166869/connect-to-sql-server-in-local-machine-host-from-docker-using-host-docker-inte
+	In SQL Server Configuration Manager, right-click TCP/IP under Protocols for SQLEXPRESS and choose Properties.
+	1. Go to the IP Addresses tab.
+	1. Scroll down to IPAll and ensure that the TCP Port is set to 1433 (or your preferred port).
+	1. In SQL Server Configuration Manager, right-click TCP/IP under Protocols for SQLEXPRESS and choose Properties.
+	1. Go to the IP Addresses tab.
+	1. Scroll down to IPAll and ensure that the TCP Port is set to 1433 (or your preferred port).
+	1. Open SQL Server Management Studio (SSMS).
+	1. Connect to the Server. Right-click on the Server and choose Properties. Go to the Security tab.
+	1. Ensure that SQL Server and Windows Authentication Mode is selected. Restart SQL Server for the changes to take effect.
+	 
+	
+
 #### Install entity framework support for migrations (optional)
 ```bash
 Install-Package Microsoft.EntityFrameworkCore.Design

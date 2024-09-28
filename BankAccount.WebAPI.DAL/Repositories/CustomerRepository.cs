@@ -18,34 +18,43 @@ namespace BankAccount.WebAPI.DAL
 
         public async Task<Customer> GetCustomerByIdAsync(int customerId)
         {
-            return await _context.Customers
-                .Include(c => c.Accounts)  // Include accounts in the result
-                .FirstOrDefaultAsync(c => c.CustomerId == customerId);
+            try
+            {
+                var customer = await _context.Customer
+                    .Include(c => c.Accounts)  // Include accounts in the result
+                    .FirstOrDefaultAsync(c => c.CustomerId == customerId);
+
+                return customer;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public async Task<IEnumerable<Customer>> GetAllCustomersAsync()
         {
-            return await _context.Customers.ToListAsync();
+            return await _context.Customer.ToListAsync();
         }
 
         public async Task AddCustomerAsync(Customer customer)
         {
-            _context.Customers.Add(customer);
+            _context.Customer.Add(customer);
             await _context.SaveChangesAsync();
         }
 
         public async Task UpdateCustomerAsync(Customer customer)
         {
-            _context.Customers.Update(customer);
+            _context.Customer.Update(customer);
             await _context.SaveChangesAsync();
         }
 
         public async Task DeleteCustomerAsync(int customerId)
         {
-            var customer = await _context.Customers.FindAsync(customerId);
+            var customer = await _context.Customer.FindAsync(customerId);
             if (customer != null)
             {
-                _context.Customers.Remove(customer);
+                _context.Customer.Remove(customer);
                 await _context.SaveChangesAsync();
             }
         }

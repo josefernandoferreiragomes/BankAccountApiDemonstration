@@ -23,9 +23,10 @@ app.Run();
 
 void ConfigureServices(IServiceCollection services, IConfiguration configuration)
 {
+    string connectionString = configuration.GetConnectionString("BankAccountDb");
     // Register DbContext, Repositories, and Business Services
     services.AddDbContext<BankAccountContext>(options =>
-        options.UseSqlServer(configuration.GetConnectionString("BankAccountDb")));
+        options.UseSqlServer(connectionString));
 
     services.AddScoped<ICustomerRepository, CustomerRepository>();
     services.AddScoped<IAccountRepository, AccountRepository>();
