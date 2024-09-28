@@ -22,6 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankAccount.WebApi.gRPCServ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccount.WebApi.gRPCService.TestConsole", "BankAccount.WebApi.gRPCService.TestConsole\BankAccount.WebApi.gRPCService.TestConsole.csproj", "{2FF82FE7-BB35-42F4-9D8A-DC6D2CB648FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccount.WebApi.BL.UnitTest", "BankAccount.WebApi.BL.UnitTest\BankAccount.WebApi.BL.UnitTest.csproj", "{E8EBB70B-6315-41FA-B063-C95172D2082A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{2FF82FE7-BB35-42F4-9D8A-DC6D2CB648FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FF82FE7-BB35-42F4-9D8A-DC6D2CB648FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FF82FE7-BB35-42F4-9D8A-DC6D2CB648FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8EBB70B-6315-41FA-B063-C95172D2082A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8EBB70B-6315-41FA-B063-C95172D2082A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8EBB70B-6315-41FA-B063-C95172D2082A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8EBB70B-6315-41FA-B063-C95172D2082A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

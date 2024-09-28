@@ -42,7 +42,11 @@
 	Install-Package Google.Protobuf
 	Install-Package Grpc.Tools
 	```
-	2. 
+13. Create NUnit test project
+	1. install moq
+	```bash
+	install-package moq
+	```
 #### Install entity framework support for migrations (optional)
 ```bash
 Install-Package Microsoft.EntityFrameworkCore.Design

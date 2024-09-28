@@ -16,7 +16,7 @@ var reply = await client.SayHelloAsync(
 Console.WriteLine("Greeting: " + reply.Message);
 
 var bankingClient = new BankService.BankServiceClient(channel);
-var bankingReply = bankingClient.GetCustomer(new CustomerRequest() { CustomerId = 1} );
+var bankingReply = await bankingClient.GetCustomerAsync(new CustomerRequest() { CustomerId = 1} );
                   
 Console.WriteLine("banking customer: " + bankingReply.FirstName);
 Console.WriteLine("Press any key to exit...");
