@@ -1,42 +1,47 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>4572f619-65a1-4bc7-b8f9-3745a629edb2</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>4572f619-65a1-4bc7-b8f9-3745a629edb2</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Generated\BankService.cs" />
-    <Compile Remove="Generated\BankServiceGrpc.cs" />
-    <Compile Remove="Generated\Greet.cs" />
-    <Compile Remove="Generated\GreetGrpc.cs" />
-  </ItemGroup>
+	<ItemGroup>
+	  <Compile Remove="GrpcGenerated\BankService.cs" />
+	  <Compile Remove="GrpcGenerated\BankServiceGrpc.cs" />
+	  <Compile Remove="GrpcGenerated\Greet.cs" />
+	  <Compile Remove="GrpcGenerated\GreetGrpc.cs" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.27.0" />
-    <PackageReference Include="Grpc.AspNetCore" Version="2.56.0" />
-    <PackageReference Include="Grpc.Tools" Version="2.56.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
-  </ItemGroup>
+	<ItemGroup>
+	  <Compile Include="obj\Debug\net8.0\Protos\BankService.cs" />
+	  <Compile Include="obj\Debug\net8.0\Protos\BankServiceGrpc.cs" />
+	  <Compile Include="obj\Debug\net8.0\Protos\Greet.cs" />
+	  <Compile Include="obj\Debug\net8.0\Protos\GreetGrpc.cs" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BankAccount.WebApi.BL\BankAccount.WebApi.BL.csproj" />
-    <ProjectReference Include="..\BankAccount.WebAPI.DAL\BankAccount.WebAPI.DAL.csproj" />
-  </ItemGroup>
-	
-  <ItemGroup>
-   <Protobuf Include="Protos\bank_service.proto" GrpcServices="Server" />
-   <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
-  </ItemGroup>
-	
-  <ItemGroup>
-    <Folder Include="Generated\" />
-  </ItemGroup>
-	
+	<ItemGroup>
+		<!-- Reference the gRPC and Protobuf packages -->
+		<PackageReference Include="Grpc.AspNetCore" Version="2.56.0" />
+		<PackageReference Include="Google.Protobuf" Version="3.27.0" />
+		<PackageReference Include="Grpc.Tools" Version="2.56.0" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\BankAccount.WebApi.BL\BankAccount.WebApi.BL.csproj" />
+		<ProjectReference Include="..\BankAccount.WebAPI.DAL\BankAccount.WebAPI.DAL.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Protobuf Include="Protos\bank_service.proto" GrpcServices="Server" />
+		<Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="GrpcGenerated\" />
+	</ItemGroup>
+
 </Project>

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "BankAccount.Grpc";
+option csharp_namespace = "BankAccount.GrpcGreeterClient";
 
 package bank;
 
