@@ -20,9 +20,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankAccount.WebApi.BL", "Ba
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankAccount.WebApi.gRPCService", "BankAccount.WebApi.gRPCService\BankAccount.WebApi.gRPCService.csproj", "{7001F21A-5526-496B-8A7F-8C7346300B49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccount.WebApi.gRPCService.TestConsole", "BankAccount.WebApi.gRPCService.TestConsole\BankAccount.WebApi.gRPCService.TestConsole.csproj", "{2FF82FE7-BB35-42F4-9D8A-DC6D2CB648FC}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccount.WebApi.BL.UnitTest", "BankAccount.WebApi.BL.UnitTest\BankAccount.WebApi.BL.UnitTest.csproj", "{E8EBB70B-6315-41FA-B063-C95172D2082A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Tests", "3.Tests", "{CD31730D-AA64-4F80-960E-E8291B9C9981}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,6 +64,7 @@ Global
 		{72B3DBCC-8443-450F-97A2-8DE67A170334} = {24EEB1CB-906D-4517-B7D2-E71378A25E2D}
 		{0A9D7048-3F1B-4BE8-AD9F-85CA7183ABEF} = {24EEB1CB-906D-4517-B7D2-E71378A25E2D}
 		{7001F21A-5526-496B-8A7F-8C7346300B49} = {24EEB1CB-906D-4517-B7D2-E71378A25E2D}
+		{E8EBB70B-6315-41FA-B063-C95172D2082A} = {CD31730D-AA64-4F80-960E-E8291B9C9981}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EE928B6B-0136-4BBE-8971-A05858561EEE}
