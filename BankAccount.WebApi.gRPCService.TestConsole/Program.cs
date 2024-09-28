@@ -6,7 +6,7 @@ using BankAccount.GrpcGreeterClient;
 
 Console.WriteLine("Hello, World! ... waiting for service to start...");
 
-Task.Delay(5000).Wait();
+Task.Delay(10000).Wait();
 
 // The port number must match the port of the gRPC server.
 using var channel = GrpcChannel.ForAddress("https://localhost:32769");
