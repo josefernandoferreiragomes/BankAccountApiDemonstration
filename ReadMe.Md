@@ -87,3 +87,7 @@ FROM (
 LEFT JOIN [Account] AS [a] ON [t].[CustomerId] = [a].[CustomerId]
 ORDER BY [t].[CustomerId]',N'@__customerId_0 int',@__customerId_0=1
 ```
+https://learn.microsoft.com/en-us/aspnet/core/tutorials/grpc/grpc-start?view=aspnetcore-8.0&tabs=visual-studio
+
+gRPC vs REST vs OpenAPI
+https://cloud.google.com/blog/products/api-management/understanding-grpc-openapi-and-rest-and-when-to-use-them
