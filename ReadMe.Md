@@ -73,3 +73,6 @@ Install-Package Microsoft.EntityFrameworkCore.Design
 Create a gRPC client and server in ASP.NET Core
 
 https://learn.microsoft.com/en-us/aspnet/core/tutorials/grpc/grpc-start?view=aspnetcore-8.0&tabs=visual-studio
+
+gRPC vs REST vs OpenAPI
+https://cloud.google.com/blog/products/api-management/understanding-grpc-openapi-and-rest-and-when-to-use-them
