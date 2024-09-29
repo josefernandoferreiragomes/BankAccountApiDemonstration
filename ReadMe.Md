@@ -35,13 +35,14 @@
 	C:\Users\josef\.nuget\packages\grpc.tools\2.55.0\tools\windows_x64\protoc.exe --csharp_out=../Generated --grpc_out=../Generated --plugin=protoc-gen-grpc=C:\Users\josef\.nuget\packages\grpc.tools\2.55.0\tools\windows_x64\grpc_csharp_plugin.exe bank_service.proto
 	```
 	4. If there are build errors in the generated, files it is due to tool version conflict
-12. Create gRPC test client cosole
+12. Create gRPC test client client
 	1. Install packages
 	```bash
 	Install-Package Grpc.Net.Client
 	Install-Package Google.Protobuf
 	Install-Package Grpc.Tools
 	```
+	2. copy the protos and configure them to generate client only  
 13. Create NUnit test project
 	1. install moq
 	```bash
@@ -73,3 +74,16 @@ Install-Package Microsoft.EntityFrameworkCore.Design
 Create a gRPC client and server in ASP.NET Core
 
 https://learn.microsoft.com/en-us/aspnet/core/tutorials/grpc/grpc-start?view=aspnetcore-8.0&tabs=visual-studio
+
+### Miscellaneous
+Script executed when getting clients from entity framework in sql server
+```sql
+exec sp_executesql N'SELECT [t].[CustomerId], [t].[CreatedAt], [t].[DateOfBirth], [t].[Email], [t].[FirstName], [t].[LastName], [t].[PhoneNumber], [t].[UpdatedAt], [a].[AccountId], [a].[AccountType], [a].[Balance], [a].[CreatedAt], [a].[Currency], [a].[CustomerId], [a].[UpdatedAt]
+FROM (
+    SELECT TOP(1) [c].[CustomerId], [c].[CreatedAt], [c].[DateOfBirth], [c].[Email], [c].[FirstName], [c].[LastName], [c].[PhoneNumber], [c].[UpdatedAt]
+    FROM [Customer] AS [c]
+    WHERE [c].[CustomerId] = @__customerId_0
+) AS [t]
+LEFT JOIN [Account] AS [a] ON [t].[CustomerId] = [a].[CustomerId]
+ORDER BY [t].[CustomerId]',N'@__customerId_0 int',@__customerId_0=1
+```

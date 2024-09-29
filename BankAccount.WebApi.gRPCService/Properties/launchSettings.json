@@ -24,7 +24,8 @@
         "ASPNETCORE_HTTP_PORTS": "8080"
       },
       "publishAllPorts": true,
-      "useSSL": true
+      "useSSL": true,
+      "applicationUrl": "http://localhost:32778;https://localhost:32779"
     }
   },
   "$schema": "http://json.schemastore.org/launchsettings.json"
