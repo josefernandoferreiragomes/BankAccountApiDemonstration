@@ -1,4 +1,4 @@
-#### Demonstration project for bank account management
+### Demonstration API project with example bank account management operations 
 
 ### Project creation walkthrough
 
@@ -27,12 +27,12 @@
 	2. Change .proto file properties 
 	Build action: ProtoBuf compiler
 	Set to generate client and server code
-	it should generate on build to C:\Users\josef\source\repos\BankAccount.Database\BankAccount.WebApi.gRPCService\obj\Debug\net8.0\Protos\GreetGrpc.cs
+	it should generate on build to C:\Users\<user>\source\repos\BankAccount.Database\BankAccount.WebApi.gRPCService\obj\Debug\net8.0\Protos\GreetGrpc.cs
 	add those files to project to prevent duplication, because they will be generated on each build, unless you configure otherwise
 	
 	3. Command to generate grpc classes manually, if needed
 	```bash
-	C:\Users\josef\.nuget\packages\grpc.tools\2.55.0\tools\windows_x64\protoc.exe --csharp_out=../Generated --grpc_out=../Generated --plugin=protoc-gen-grpc=C:\Users\josef\.nuget\packages\grpc.tools\2.55.0\tools\windows_x64\grpc_csharp_plugin.exe bank_service.proto
+	C:\Users\<user>\.nuget\packages\grpc.tools\2.55.0\tools\windows_x64\protoc.exe --csharp_out=../Generated --grpc_out=../Generated --plugin=protoc-gen-grpc=C:\Users\<user>\.nuget\packages\grpc.tools\2.55.0\tools\windows_x64\grpc_csharp_plugin.exe bank_service.proto
 	```
 	4. If there are build errors in the generated, files it is due to tool version conflict
 12. Create gRPC test client client
