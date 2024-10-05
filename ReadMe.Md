@@ -1,5 +1,10 @@
 #### Demonstration project for bank account management
 
+The purpose of this project is to demonstrate a gRPC API with Sdk
+The Business layer is built to facilitate swapping database or exposing in multiple API types
+
+Further projects include swapping the Sql Server database for MySql, or exposing the service using OpenAPI
+
 ### Project creation walkthrough
 
  1. Used AI to generate the database tables
