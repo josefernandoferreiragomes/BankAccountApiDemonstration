@@ -70,6 +70,7 @@ Currently initiating the OpenAPI project
 	1. Ensure that SQL Server and Windows Authentication Mode is selected. Restart SQL Server for the changes to take effect.
 	 
 	
+#### Notice the ports are still dynaic and must be updated in the smoke test, until configuration for fixed port is made
 
 #### Install entity framework support for migrations (optional)
 ```bash
@@ -81,6 +82,10 @@ Install-Package Microsoft.EntityFrameworkCore.Design
 Create a gRPC client and server in ASP.NET Core
 
 https://learn.microsoft.com/en-us/aspnet/core/tutorials/grpc/grpc-start?view=aspnetcore-8.0&tabs=visual-studio
+
+Primary constructor
+
+https://devblogs.microsoft.com/dotnet/csharp-primary-constructors-refactoring/
 
 ### Miscellaneous
 Script executed when getting clients from entity framework in sql server
