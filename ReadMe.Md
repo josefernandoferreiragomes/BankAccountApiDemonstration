@@ -5,6 +5,8 @@ The Business layer is built to facilitate swapping database or exposing in multi
 
 Further projects include swapping the Sql Server database for MySql, or exposing the service using OpenAPI
 
+Currently initiating the OpenAPI project
+
 ### Project creation walkthrough
 
  1. Used AI to generate the database tables

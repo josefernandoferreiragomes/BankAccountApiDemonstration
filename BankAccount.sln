@@ -13,8 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Data", "1.Data", "{A41DF3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7840D924-048A-4D8E-AA82-54181D25D2CE}"
 	ProjectSection(SolutionItems) = preProject
-		ReadMe.Md = ReadMe.Md
 		AdditionalDALForMySQL.md = AdditionalDALForMySQL.md
+		ReadMe.Md = ReadMe.Md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankAccount.WebApi.BL", "BankAccount.WebApi.BL\BankAccount.WebApi.BL.csproj", "{0A9D7048-3F1B-4BE8-AD9F-85CA7183ABEF}"
@@ -27,7 +27,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Tests", "3.Tests", "{CD31
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankAccount.WebApi.gRPCService.Sdk", "BankAccount.WebApi.gRPCService.Sdk\BankAccount.WebApi.gRPCService.Sdk.csproj", "{A6A32CAD-5AC0-4F4E-BC49-BA31F0A9FC25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccount.WebAPI.gRPCService.SmokeTest", "BankAccount.WebAPI.gRPCSservice.SmokeTest\BankAccount.WebAPI.gRPCService.SmokeTest.csproj", "{34E63718-4B08-4B24-974A-3E6FA0B8C2B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankAccount.WebAPI.gRPCService.SmokeTest", "BankAccount.WebAPI.gRPCSservice.SmokeTest\BankAccount.WebAPI.gRPCService.SmokeTest.csproj", "{34E63718-4B08-4B24-974A-3E6FA0B8C2B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccount.WebApi.OpenAPI", "BankAccount.WebApi.OpenAPI\BankAccount.WebApi.OpenAPI.csproj", "{C6398D0C-9E08-41EB-ACDD-D0A835E61B64}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,6 +66,10 @@ Global
 		{34E63718-4B08-4B24-974A-3E6FA0B8C2B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34E63718-4B08-4B24-974A-3E6FA0B8C2B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34E63718-4B08-4B24-974A-3E6FA0B8C2B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6398D0C-9E08-41EB-ACDD-D0A835E61B64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6398D0C-9E08-41EB-ACDD-D0A835E61B64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6398D0C-9E08-41EB-ACDD-D0A835E61B64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6398D0C-9E08-41EB-ACDD-D0A835E61B64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +81,7 @@ Global
 		{7001F21A-5526-496B-8A7F-8C7346300B49} = {24EEB1CB-906D-4517-B7D2-E71378A25E2D}
 		{E8EBB70B-6315-41FA-B063-C95172D2082A} = {CD31730D-AA64-4F80-960E-E8291B9C9981}
 		{34E63718-4B08-4B24-974A-3E6FA0B8C2B3} = {CD31730D-AA64-4F80-960E-E8291B9C9981}
+		{C6398D0C-9E08-41EB-ACDD-D0A835E61B64} = {24EEB1CB-906D-4517-B7D2-E71378A25E2D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EE928B6B-0136-4BBE-8971-A05858561EEE}

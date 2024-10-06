@@ -2,7 +2,7 @@
 
 namespace BankAccount.WebApi.BL
 {
-    public class CustomerService
+    public class CustomerService : ICustomerService
     {
         private readonly ICustomerRepository _customerRepository;
 
