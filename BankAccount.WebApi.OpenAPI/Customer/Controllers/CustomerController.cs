@@ -31,12 +31,12 @@ public class CustomerController(
         return response;
     }
 
-    [HttpGet, Microsoft.AspNetCore.Mvc.Route("alive")]
+    [HttpGet, Microsoft.AspNetCore.Mvc.Route("test")]
     [ProducesResponseType<string>((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    public ActionResult<string> Alive()
+    public ActionResult<string> Test()
     {
-        return Ok("I am alive.");
+        return Ok("Service replies to request.");
     }
 }
 
