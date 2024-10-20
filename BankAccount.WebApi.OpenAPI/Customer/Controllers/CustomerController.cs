@@ -33,6 +33,18 @@ public class CustomerController(
         return response;
     }
 
+    [HttpPost, Microsoft.AspNetCore.Mvc.Route("get")]
+    [ProducesResponseType<BankAccount.WebAPI.DAL.Customer>((int)HttpStatusCode.OK)]
+    [ProducesResponseType<BankAccount.WebAPI.DAL.Customer>((int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    public async Task<BankAccount.WebAPI.DAL.Customer> CustomerGet(int customerId)
+    {
+        using var _ = logger.BeginScope($"[CustomerId={customerId}");
+        var response = await customerService.GetCustomerByIdAsync(customerId);
+
+        return response;
+    }
+
     [HttpGet, Microsoft.AspNetCore.Mvc.Route("test")]
     [ProducesResponseType<string>((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]

@@ -50,11 +50,42 @@ Currently initiating the OpenAPI project
 	Install-Package Grpc.Tools
 	```
 	2. copy the protos and configure them to generate client only  
+
 13. Create NUnit test project
 	1. install moq
 	```bash
 	install-package moq
 	```
+	2. configure easy grpc method discovery
+	```bash
+	dotnet add package Grpc.AspNetCore.Server.Reflection --version 2.66.0
+	 ```
+	3. with chocolatey install go 
+	```bash
+	choco install go
+	```
+	4. install from go
+	```bash
+	go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest
+	```
+	5. restart the machine
+	6. describe the service:
+	```bash
+	grpcurl localhost:32770 describe
+	```
+	7. test one method in the command line
+	```bash
+	grpcurl -d '{\"Name\": 13234 }' localhost:32771 greet.Greeter/SayHello
+	```
+	8. install grpcui
+	```bash
+	go install github.com/fullstorydev/grpcui/cmd/grpcui@latest
+	```
+	9. open grpcui
+	```bash
+	grpcui localhost:32771
+	```
+	
 14. Configure sql server express
 	1. create user dockerUser mypass
 	2. Open SQL Server Configuration Manager and Enable TCP/IP in Server Network Configuration 
@@ -68,8 +99,12 @@ Currently initiating the OpenAPI project
 	1. Open SQL Server Management Studio (SSMS).
 	1. Connect to the Server. Right-click on the Server and choose Properties. Go to the Security tab.
 	1. Ensure that SQL Server and Windows Authentication Mode is selected. Restart SQL Server for the changes to take effect.
-	 
+	1. start sql server browser 
 	
+15. create openApi project as another exposure tachnology, using the remaining BL and DAL
+	1. in case swagger does not open (the port might change)
+	https://localhost:32773/swagger/index.html
+	1. 
 #### Notice the ports are still dynaic and must be updated in the smoke test, until configuration for fixed port is made
 
 #### Install entity framework support for migrations (optional)
@@ -86,6 +121,10 @@ https://learn.microsoft.com/en-us/aspnet/core/tutorials/grpc/grpc-start?view=asp
 Primary constructor
 
 https://devblogs.microsoft.com/dotnet/csharp-primary-constructors-refactoring/
+
+Configure service method discovery
+
+https://learn.microsoft.com/en-us/aspnet/core/grpc/test-tools?view=aspnetcore-8.0
 
 ### Miscellaneous
 Script executed when getting clients from entity framework in sql server

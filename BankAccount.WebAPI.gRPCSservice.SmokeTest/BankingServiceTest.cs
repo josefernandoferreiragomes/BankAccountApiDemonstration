@@ -17,7 +17,7 @@ namespace BankAccount.Tests
         {
             // Create a channel to connect to the gRPC server
             // Replace localhost with the actual host and port of the running gRPC server
-            var channel = GrpcChannel.ForAddress("https://localhost:32768");
+            var channel = GrpcChannel.ForAddress("https://localhost:32771");
             _bankingClient = new BankService.BankServiceClient(channel);
         }
 
