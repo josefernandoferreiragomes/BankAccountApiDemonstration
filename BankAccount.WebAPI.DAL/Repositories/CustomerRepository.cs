@@ -58,6 +58,9 @@ namespace BankAccount.WebAPI.DAL
                 await _context.SaveChangesAsync();
             }
         }
+
+        public List<CustomerAccountCard> ListCustomerAccountCardAsync(int customerID)
+           => _context.Database.SqlQueryRaw<CustomerAccountCard>("dbo.ListCustomerAccountCardAsync", customerID)?.ToList();
     }
 
 }

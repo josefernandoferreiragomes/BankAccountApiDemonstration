@@ -1,4 +1,5 @@
 using BankAccount.WebApi.OpenAPI.Features;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddCustomerServices(builder.Configuration);
+
+// Configure Serilog
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Http("http://localhost:8080", null) // Logstash endpoint
+    .CreateLogger();
+
+builder.Host.UseSerilog();
 
 var app = builder.Build();
 

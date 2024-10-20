@@ -26,6 +26,7 @@ namespace BankAccount.WebApi.BL
 
         // Get all customers
         public Task<IEnumerable<Customer>> GetAllCustomersAsync();
-       
+
+        public IEnumerable<CustomerAccountCard> ListCustomerAccountCardAsync(int customerId);
     }
 }

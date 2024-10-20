@@ -9,26 +9,25 @@ using System.Diagnostics;
 namespace BankAccount.WebApi.OpenAPI.Features.Customer.Controllers;
 
 //[Authorize]
-[Microsoft.AspNetCore.Mvc.Route("api/customer")]
+[Microsoft.AspNetCore.Mvc.Route("api/customeraccountcard")]
 [ApiController]
 [Consumes("application/json")]
 [Produces("application/json")]
 [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
-public class CustomerController(
-    ILogger<CustomerController> logger,
+public class CustomerAccountCardController(
+    ILogger<CustomerAccountCardController> logger,
     ICustomerService customerService) : ControllerBase 
 {
-    //private readonly ILogger<CustomerController> _logger;
+    //private readonly ILogger<CustomerAccountCardController> _logger;
     //private readonly ICustomerService _customerService;
 
-    [HttpPost, Microsoft.AspNetCore.Mvc.Route("create")]
-    [ProducesResponseType<BankAccount.WebAPI.DAL.Customer>((int)HttpStatusCode.OK)]
-    [ProducesResponseType<BankAccount.WebAPI.DAL.Customer>((int)HttpStatusCode.BadRequest)]
+    [HttpGet, Microsoft.AspNetCore.Mvc.Route("list")]
+    [ProducesResponseType<BankAccount.WebAPI.DAL.CustomerAccountCard>((int)HttpStatusCode.BadRequest)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    public async Task<BankAccount.WebAPI.DAL.Customer> CustomerCreate(string firstName, string lastName, string email, string phoneNumber, DateTime dateOfBirth)
+    public List<BankAccount.WebAPI.DAL.CustomerAccountCard> CustomerAccountCardList(int customerId)
     {
-        using var _ = logger.BeginScope($"[FirstName={firstName}");
-        var response = await customerService.CreateCustomerAsync(firstName, lastName, email, phoneNumber, dateOfBirth);
+        using var _ = logger.BeginScope($"[CustomerId={customerId}");
+        var response = customerService.ListCustomerAccountCardAsync(customerId)?.ToList();
         
         return response;
     }
@@ -38,8 +37,8 @@ public class CustomerController(
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public ActionResult<string> Test()
     {
-        logger.LogInformation("CustomerControler method Test started...");
-        Debug.WriteLine("CustomerControler method Test started...");
+        logger.LogInformation("CustomerAccountCardControler method Test started...");
+        Debug.WriteLine("CustomerAccountCardControler method Test started...");
         return Ok("Service replies to request.");
     }
 }

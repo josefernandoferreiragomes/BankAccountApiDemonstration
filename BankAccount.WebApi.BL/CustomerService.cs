@@ -67,6 +67,11 @@ namespace BankAccount.WebApi.BL
         {
             return await _customerRepository.GetAllCustomersAsync();
         }
+
+        public IEnumerable<CustomerAccountCard> ListCustomerAccountCardAsync(int customerId)
+        {
+            return _customerRepository.ListCustomerAccountCardAsync(customerId);
+        }
     }
 
 }

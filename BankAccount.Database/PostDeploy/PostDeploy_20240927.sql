@@ -41,3 +41,16 @@ BEGIN
         (3, 'Deposit', 500.00, 'Check deposit'),
         (4, 'Withdrawal', 50.00, 'Online purchase');
 END
+
+-- Sample data for DebitCard
+IF NOT EXISTS (
+    SELECT 1 FROM DebitCard
+)
+BEGIN
+    INSERT INTO DebitCard (AccountId, DebitCardType, MaximumAmount, CreatedAt)
+    VALUES
+        (1, 'Standard', 1000.00, GETDATE()),
+        (1, 'Premium', 2500.00, GETDATE()),
+        (2, 'Standard', 1500.00, GETDATE()),
+        (3, 'Standard', 500.00, GETDATE());
+END
