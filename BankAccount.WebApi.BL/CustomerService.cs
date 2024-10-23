@@ -39,7 +39,7 @@ namespace BankAccount.WebApi.BL
         }
 
         // Update customer details
-        public async Task UpdateCustomerAsync(int customerId, string firstName, string lastName, string email, string phoneNumber)
+        public async Task<Customer> UpdateCustomerAsync(int customerId, string firstName, string lastName, string email, string phoneNumber)
         {
             var customer = await _customerRepository.GetCustomerByIdAsync(customerId);
             if (customer == null)
@@ -54,6 +54,7 @@ namespace BankAccount.WebApi.BL
             customer.PhoneNumber = phoneNumber;
 
             await _customerRepository.UpdateCustomerAsync(customer);
+            return customer;
         }
 
         // Delete a customer

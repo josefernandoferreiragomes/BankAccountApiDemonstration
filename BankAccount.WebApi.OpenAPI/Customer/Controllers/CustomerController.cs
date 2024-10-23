@@ -33,7 +33,28 @@ public class CustomerController(
         return response;
     }
 
-    [HttpPost, Microsoft.AspNetCore.Mvc.Route("get")]
+    //[HttpPut, Microsoft.AspNetCore.Mvc.Route("update")]
+    //[ProducesResponseType<BankAccount.WebAPI.DAL.Customer>((int)HttpStatusCode.OK)]
+    //[ProducesResponseType<BankAccount.WebAPI.DAL.Customer>((int)HttpStatusCode.BadRequest)]
+    //[ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    //public async Task<BankAccount.WebAPI.DAL.Customer> CustomerUpdate(BankAccount.WebAPI.DAL.Customer customer)
+    //{
+    //    TODO parallel version of the update, refactored
+    //    return response;
+    //}
+    [HttpPut, Microsoft.AspNetCore.Mvc.Route("update")]
+    [ProducesResponseType<BankAccount.WebAPI.DAL.Customer>((int)HttpStatusCode.OK)]
+    [ProducesResponseType<BankAccount.WebAPI.DAL.Customer>((int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    public async Task<BankAccount.WebAPI.DAL.Customer> CustomerUpdate(BankAccount.WebAPI.DAL.Customer customer)
+    {
+        using var _ = logger.BeginScope($"[CustomerId={customer.CustomerId}");
+        var response = await customerService.UpdateCustomerAsync(customer.CustomerId, customer.FirstName, customer.LastName, customer.Email, customer.PhoneNumber);
+
+        return response;
+    }
+
+    [HttpGet, Microsoft.AspNetCore.Mvc.Route("get")]
     [ProducesResponseType<BankAccount.WebAPI.DAL.Customer>((int)HttpStatusCode.OK)]
     [ProducesResponseType<BankAccount.WebAPI.DAL.Customer>((int)HttpStatusCode.BadRequest)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]

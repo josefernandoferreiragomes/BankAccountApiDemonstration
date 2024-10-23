@@ -104,6 +104,16 @@ Currently initiating the OpenAPI project
 15. create openApi project as another exposure tachnology, using the remaining BL and DAL
 	1. in case swagger does not open (the port might change)
 	https://localhost:32773/swagger/index.html
+16. create sdk project
+	1. add newtonsoft.json
+	```bash
+	dotnet add package Newtonsoft.Json
+	```
+	1. Generate client sdk
+	```bash
+	1. nswag openapi2csclient /input:https://localhost:32773/swagger/v1/swagger.json /classname:BankAccountOpenApiSdk /namespace:BankAccountOpenApiSdk.Client /output:BankAccountOpenApiSdk.cs
+	```
+17. create nunit smoke test
 	1. 
 #### Notice the ports are still dynaic and must be updated in the smoke test, until configuration for fixed port is made
 
