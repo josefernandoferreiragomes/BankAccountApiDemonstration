@@ -72,15 +72,15 @@ namespace BankAccountOpenApiV1Sdk.Client
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Customer> ListAsync()
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Customer>> ListAllAsync()
         {
-            return ListAsync(System.Threading.CancellationToken.None);
+            return ListAllAsync(System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Customer> ListAsync(System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Customer>> ListAllAsync(System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -131,7 +131,7 @@ namespace BankAccountOpenApiV1Sdk.Client
                         else
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Customer>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<Customer>>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -613,14 +613,14 @@ namespace BankAccountOpenApiV1Sdk.Client
         }
 
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task List2Async(int? customerId)
+        public virtual System.Threading.Tasks.Task ListAsync(int? customerId)
         {
-            return List2Async(customerId, System.Threading.CancellationToken.None);
+            return ListAsync(customerId, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task List2Async(int? customerId, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task ListAsync(int? customerId, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;

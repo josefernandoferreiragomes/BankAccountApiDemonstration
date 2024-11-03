@@ -26,15 +26,15 @@ public class CustomerV1Controller(
 
     [HttpGet, Microsoft.AspNetCore.Mvc.Route("list")]
     [MapToApiVersion("1.0")]
-    [ProducesResponseType<BankAccount.WebAPI.DAL.Customer>((int)HttpStatusCode.OK)]
-    [ProducesResponseType<BankAccount.WebAPI.DAL.Customer>((int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType(typeof(IEnumerable<BankAccount.WebAPI.DAL.Customer>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(IEnumerable<BankAccount.WebAPI.DAL.Customer>), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    public async Task<IEnumerable<BankAccount.WebAPI.DAL.Customer>> CustomerListV1()
+    public async Task<Results<Ok<IEnumerable<BankAccount.WebAPI.DAL.Customer>>, BadRequest<string>>> CustomerListV1()
     {
         using var _ = logger.BeginScope("list all customers");
         var response = await customerService.GetAllCustomersAsync();
 
-        return response;
+        return TypedResults.Ok(response);
     }
 
     [HttpGet, Microsoft.AspNetCore.Mvc.Route("get")]
@@ -52,40 +52,42 @@ public class CustomerV1Controller(
 
     [HttpPost, Microsoft.AspNetCore.Mvc.Route("create")]    
     [MapToApiVersion("1.0")]
-    [ProducesResponseType<BankAccount.WebAPI.DAL.Customer>((int)HttpStatusCode.OK)]
-    [ProducesResponseType<BankAccount.WebAPI.DAL.Customer>((int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType(typeof(BankAccount.WebAPI.DAL.Customer), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(BankAccount.WebAPI.DAL.Customer), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    public async Task<BankAccount.WebAPI.DAL.Customer> CustomerCreateV1(string firstName, string lastName, string email, string phoneNumber, DateTime dateOfBirth)
+    public async Task<Results<Ok<BankAccount.WebAPI.DAL.Customer>, BadRequest<string>>> CustomerCreateV1(string firstName, string lastName, string email, string phoneNumber, DateTime dateOfBirth)
     {
         using var _ = logger.BeginScope($"[FirstName={firstName}");
         var response = await customerService.CreateCustomerAsync(firstName, lastName, email, phoneNumber, dateOfBirth);
         
-        return response;
+        return TypedResults.Ok(response);
     }   
 
     //API versioning demonstration
     [HttpPut, Microsoft.AspNetCore.Mvc.Route("update")]   
     [MapToApiVersion("1.0")]
-    [ProducesResponseType<BankAccount.WebAPI.DAL.Customer>((int)HttpStatusCode.OK)]
-    [ProducesResponseType<BankAccount.WebAPI.DAL.Customer>((int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType(typeof(BankAccount.WebAPI.DAL.Customer), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(BankAccount.WebAPI.DAL.Customer), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    public async Task<BankAccount.WebAPI.DAL.Customer> CustomerUpdateV1(int customerId, string firstName, string lastName, string email, string phoneNumber)
+    public async Task<Results<Ok<BankAccount.WebAPI.DAL.Customer>, BadRequest<string>>> CustomerUpdateV1(int customerId, string firstName, string lastName, string email, string phoneNumber)
     {
         using var _ = logger.BeginScope($"[CustomerId={customerId}");
         var response = await customerService.UpdateCustomerAsync(customerId, firstName, lastName, email, phoneNumber);
 
-        return response;
+        return TypedResults.Ok(response);
     }       
 
     [HttpGet, Microsoft.AspNetCore.Mvc.Route("test")]   
     [MapToApiVersion("1.0")]
-    [ProducesResponseType<string>((int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(string), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(string), (int)HttpStatusCode.BadRequest)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    public ActionResult<string> TestV1()
+    public Results<Ok<string>, BadRequest<string>> TestV1()
     {
         logger.LogInformation("CustomerControler method Test started...");
         Debug.WriteLine("CustomerControler method Test started...");
-        return Ok("Service replies to request.");
+
+        return TypedResults.Ok("Service replies to request.");
     }
 }
 

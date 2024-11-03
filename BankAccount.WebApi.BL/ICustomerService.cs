@@ -17,6 +17,7 @@ namespace BankAccount.WebApi.BL
 
 
         // Update customer details
+        public Task<Customer> UpdateCustomerAsync(Customer customer);
         public Task<Customer> UpdateCustomerAsync(int customerId, string firstName, string lastName, string email, string phoneNumber);
 
 

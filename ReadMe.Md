@@ -170,6 +170,12 @@ https://weblogs.asp.net/ricardoperes/asp-net-core-api-versioning
 https://code-maze.com/aspnetcore-api-versioning/
 https://medium.com/@seldah/managing-multiple-versions-of-your-api-with-net-and-swagger-47b4143e8bf5
 
+### Run the smoke tests
+
+Open one instance of visual studio with gRPCService or OpenAPI as startup project, and start the application
+
+Open another instance with one of the smoke test startup projects, and run the tests
+
 ### Set default port
 Add configuration to launchSettings.json
 

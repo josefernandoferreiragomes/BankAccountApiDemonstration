@@ -4,6 +4,7 @@ using BankAccount.WebApi.OpenAPI.Features;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using System.Reflection;
 using System.Text.Json.Serialization;
 
 
@@ -29,6 +30,10 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "API V1", Version = "v1" });
     c.SwaggerDoc("v2", new OpenApiInfo { Title = "API V2", Version = "v2" });
+    // Ensure Swagger includes XML comments (if any)
+    //var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    //c.IncludeXmlComments(xmlPath);
 });
 
 builder.Services.AddCustomerServices(builder.Configuration);
