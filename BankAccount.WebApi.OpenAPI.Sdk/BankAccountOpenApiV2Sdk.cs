@@ -327,9 +327,6 @@ namespace BankAccountOpenApiV2Sdk.Client
         [Newtonsoft.Json.JsonProperty("updatedAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset UpdatedAt { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("customer", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Customer Customer { get; set; }
-
         [Newtonsoft.Json.JsonProperty("accountTransactions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<AccountTransaction> AccountTransactions { get; set; }
 

@@ -49,7 +49,7 @@ namespace BankAccount.WebApi.OpenAPI.SmokeTest
             var customerId = 2;
 
             // Act
-            //var customerResponse = await _bankingClient.List2Async();
+            //var customerResponse = await _bankingClient.ListAsync();
 
             ////Assert & Print
             //foreach (var customer in customerResponse)
@@ -69,7 +69,7 @@ namespace BankAccount.WebApi.OpenAPI.SmokeTest
         public async Task Test_GetCustomerDetails()
         {
             // Arrange
-            var customerId = 2;
+            var customerId = 1;
 
             // Act
             var customerResponse = await _bankingClient.GetAsync(customerId);
@@ -84,27 +84,7 @@ namespace BankAccount.WebApi.OpenAPI.SmokeTest
             Console.WriteLine($"PhoneNumber: {customerResponse?.PhoneNumber}");
             Console.WriteLine($"DateOfBirth: {customerResponse?.DateOfBirth}");
         }
-
-        [Test]
-        public async Task Test_GetCustomerDetailsAlternate()
-        {
-            // Arrange
-            var customerId = 1;
-
-            // Act
-            var customerResponse = await _bankingClientAlternate.GetAsync(customerId);
-
-            // Assert & Print
-            Assert.That(customerResponse is not null);
-            Assert.That(Equals(1, customerResponse?.CustomerId));
-            Console.WriteLine($"CustomerId: {customerResponse?.CustomerId}");
-            Console.WriteLine($"FirstName: {customerResponse?.FirstName}");
-            Console.WriteLine($"LastName: {customerResponse?.LastName}");
-            Console.WriteLine($"Email: {customerResponse?.Email}");
-            Console.WriteLine($"PhoneNumber: {customerResponse?.PhoneNumber}");
-            Console.WriteLine($"DateOfBirth: {customerResponse?.DateOfBirth}");
-        }
-
+        
         [Test]
         public async Task Test_UpdateCustomerDetails()
         {
