@@ -1,6 +1,7 @@
 using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
 using BankAccount.WebApi.OpenAPI.Features;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using System.Text.Json.Serialization;
@@ -10,7 +11,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles); ;
+builder.Services.AddControllers(options =>
+    {
+        options.OutputFormatters.RemoveType<StringOutputFormatter>();
+        options.OutputFormatters.RemoveType<HttpNoContentOutputFormatter>();
+    })    
+    .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 //builder.Services.EnableInternalControllers();
 //builder.Services.AddJsonOptions(opts =>
 // {

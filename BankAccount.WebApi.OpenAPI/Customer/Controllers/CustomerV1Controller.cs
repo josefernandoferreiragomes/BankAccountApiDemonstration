@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Diagnostics;
 using Asp.Versioning;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 
 namespace BankAccount.WebApi.OpenAPI.Features.Customer.Controllers;
@@ -22,8 +23,32 @@ public class CustomerV1Controller(
     ILogger<CustomerV1Controller> logger,
     ICustomerService customerService) : ControllerBase 
 {
-    //private readonly ILogger<CustomerController> _logger;
-    //private readonly ICustomerService _customerService;
+
+    [HttpGet, Microsoft.AspNetCore.Mvc.Route("list")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType<BankAccount.WebAPI.DAL.Customer>((int)HttpStatusCode.OK)]
+    [ProducesResponseType<BankAccount.WebAPI.DAL.Customer>((int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    public async Task<IEnumerable<BankAccount.WebAPI.DAL.Customer>> CustomerListV1()
+    {
+        using var _ = logger.BeginScope("list all customers");
+        var response = await customerService.GetAllCustomersAsync();
+
+        return response;
+    }
+
+    [HttpGet, Microsoft.AspNetCore.Mvc.Route("get")]
+    [MapToApiVersion("1.0")]    
+    [ProducesResponseType(typeof(BankAccount.WebAPI.DAL.Customer), (int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType(typeof(BankAccount.WebAPI.DAL.Customer), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    public async Task<Results<Ok<BankAccount.WebAPI.DAL.Customer>, BadRequest<string>>> CustomerGetV1(int customerId)
+    {
+        using var _ = logger.BeginScope($"[CustomerId={customerId}");
+        var response = await customerService.GetCustomerByIdAsync(customerId);     
+
+        return TypedResults.Ok(response);
+    }
 
     [HttpPost, Microsoft.AspNetCore.Mvc.Route("create")]    
     [MapToApiVersion("1.0")]
@@ -50,34 +75,7 @@ public class CustomerV1Controller(
         var response = await customerService.UpdateCustomerAsync(customerId, firstName, lastName, email, phoneNumber);
 
         return response;
-    }
-
-    ////API versioning demonstration
-    //[HttpPut, Microsoft.AspNetCore.Mvc.Route("update")]
-    //[ProducesResponseType<BankAccount.WebAPI.DAL.Customer>((int)HttpStatusCode.OK)]
-    //[ProducesResponseType<BankAccount.WebAPI.DAL.Customer>((int)HttpStatusCode.BadRequest)]
-    //[ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    //[MapToApiVersion("2.0")]
-    //public async Task<BankAccount.WebAPI.DAL.Customer> CustomerUpdate(BankAccount.WebAPI.DAL.Customer customer)
-    //{
-    //    using var _ = logger.BeginScope($"[CustomerId={customer.CustomerId}");
-    //    var response = await customerService.UpdateCustomerAsync(customer.CustomerId, customer.FirstName, customer.LastName, customer.Email, customer.PhoneNumber);
-
-    //    return response;
-    //}
-
-    [HttpGet, Microsoft.AspNetCore.Mvc.Route("get")]   
-    [MapToApiVersion("1.0")]
-    [ProducesResponseType<BankAccount.WebAPI.DAL.Customer>((int)HttpStatusCode.OK)]
-    [ProducesResponseType<BankAccount.WebAPI.DAL.Customer>((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    public async Task<BankAccount.WebAPI.DAL.Customer> CustomerGetV1(int customerId)
-    {
-        using var _ = logger.BeginScope($"[CustomerId={customerId}");
-        var response = await customerService.GetCustomerByIdAsync(customerId);
-
-        return response;
-    }
+    }       
 
     [HttpGet, Microsoft.AspNetCore.Mvc.Route("test")]   
     [MapToApiVersion("1.0")]
