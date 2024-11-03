@@ -5,17 +5,21 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Diagnostics;
+using System.Collections.Generic;
+using Asp.Versioning;
 
 namespace BankAccount.WebApi.OpenAPI.Features.Customer.Controllers;
 
 //[Authorize]
-[Microsoft.AspNetCore.Mvc.Route("api/customeraccountcard")]
 [ApiController]
+[ControllerName("CustomerAccountCard")]
+[Microsoft.AspNetCore.Mvc.Route("api/v{version:apiVersion}/[controller]")]
+[ApiVersion("1.0")]
 [Consumes("application/json")]
 [Produces("application/json")]
 [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
-public class CustomerAccountCardController(
-    ILogger<CustomerAccountCardController> logger,
+public class CustomerAccountCardV1Controller(
+    ILogger<CustomerAccountCardV1Controller> logger,
     ICustomerService customerService) : ControllerBase 
 {
     //private readonly ILogger<CustomerAccountCardController> _logger;
@@ -26,8 +30,9 @@ public class CustomerAccountCardController(
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public List<BankAccount.WebAPI.DAL.CustomerAccountCard> CustomerAccountCardList(int customerId)
     {
+        List<BankAccount.WebAPI.DAL.CustomerAccountCard> response = new List<CustomerAccountCard>();
         using var _ = logger.BeginScope($"[CustomerId={customerId}");
-        var response = customerService.ListCustomerAccountCardAsync(customerId)?.ToList();
+        response = customerService.ListCustomerAccountCardAsync(customerId)?.ToList() ?? response;
         
         return response;
     }

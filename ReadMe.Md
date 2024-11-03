@@ -109,9 +109,11 @@ Currently initiating the OpenAPI project
 	```bash
 	dotnet add package Newtonsoft.Json
 	```
-	1. Generate client sdk
+	1. Generate client sdk. 
+	1.1. Execute in Sdk project folder
 	```bash
-	1. nswag openapi2csclient /input:https://localhost:32773/swagger/v1/swagger.json /classname:BankAccountOpenApiSdk /namespace:BankAccountOpenApiSdk.Client /output:BankAccountOpenApiSdk.cs
+	   nswag openapi2csclient /input:https://localhost:32771/swagger/v1/swagger.json /classname:BankAccountOpenApiSdk /namespace:BankAccountOpenApiV1Sdk.Client /output:BankAccountOpenApiV1Sdk.cs
+	   nswag openapi2csclient /input:https://localhost:32771/swagger/v2/swagger.json /classname:BankAccountOpenApiSdk /namespace:BankAccountOpenApiV2Sdk.Client /output:BankAccountOpenApiV2Sdk.cs
 	```
 17. create nunit smoke test
 	1. 
@@ -153,6 +155,20 @@ https://learn.microsoft.com/en-us/aspnet/core/tutorials/grpc/grpc-start?view=asp
 gRPC vs REST vs OpenAPI
 https://cloud.google.com/blog/products/api-management/understanding-grpc-openapi-and-rest-and-when-to-use-them
 
+### Api Versioning
+
+Install package onto OpenApi project
+```bash
+Install-Package Asp.Versioning.Mvc -Version 8.1.0
+Install-Package Asp.Versioning.Mvc.ApiExplorer -Version 8.1.0
+Install-Package Swashbuckle.AspNetCore -Version 6.9.0
+```
+
+https://weblogs.asp.net/ricardoperes/asp-net-core-api-versioning
+https://code-maze.com/aspnetcore-api-versioning/
+https://medium.com/@seldah/managing-multiple-versions-of-your-api-with-net-and-swagger-47b4143e8bf5
+
+
 ### Set up ELK
 Set up a .NET API application that logs to Serilog, views logs in Kibana, and uses Grafana for monitoring on your local machine
 
@@ -181,7 +197,6 @@ app.MapGet("/", () => "Hello World!");
 
 app.Run();
 ```
-
 
 #### Set Up ELK
 

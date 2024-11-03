@@ -18,7 +18,7 @@
 #pragma warning disable 8625 // Disable "CS8625 Cannot convert null literal to non-nullable reference type"
 #pragma warning disable 8765 // Disable "CS8765 Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes)."
 
-namespace BankAccountOpenApiSdk.Client
+namespace BankAccountOpenApiV1Sdk.Client
 {
     using System = global::System;
 
@@ -70,7 +70,7 @@ namespace BankAccountOpenApiSdk.Client
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
 
-        /// <returns>Success</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual System.Threading.Tasks.Task<Customer> CreateAsync(string firstName, string lastName, string email, string phoneNumber, System.DateTimeOffset? dateOfBirth)
         {
@@ -78,7 +78,7 @@ namespace BankAccountOpenApiSdk.Client
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Success</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Customer> CreateAsync(string firstName, string lastName, string email, string phoneNumber, System.DateTimeOffset? dateOfBirth, System.Threading.CancellationToken cancellationToken)
         {
@@ -94,8 +94,8 @@ namespace BankAccountOpenApiSdk.Client
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/customer/create"
-                    urlBuilder_.Append("api/customer/create");
+                    // Operation Path: "api/v1/Customer/create"
+                    urlBuilder_.Append("api/v1/Customer/create");
                     urlBuilder_.Append('?');
                     if (firstName != null)
                     {
@@ -191,17 +191,17 @@ namespace BankAccountOpenApiSdk.Client
             }
         }
 
-        /// <returns>Success</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Customer> UpdateAsync(Customer body)
+        public virtual System.Threading.Tasks.Task<Customer> UpdateAsync(int? customerId, string firstName, string lastName, string email, string phoneNumber)
         {
-            return UpdateAsync(body, System.Threading.CancellationToken.None);
+            return UpdateAsync(customerId, firstName, lastName, email, phoneNumber, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Success</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Customer> UpdateAsync(Customer body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Customer> UpdateAsync(int? customerId, string firstName, string lastName, string email, string phoneNumber, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -209,17 +209,36 @@ namespace BankAccountOpenApiSdk.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, JsonSerializerSettings);
-                    var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                    request_.Content = content_;
+                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/customer/update"
-                    urlBuilder_.Append("api/customer/update");
+                    // Operation Path: "api/v1/Customer/update"
+                    urlBuilder_.Append("api/v1/Customer/update");
+                    urlBuilder_.Append('?');
+                    if (customerId != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("customerId")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(customerId, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (firstName != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("firstName")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(firstName, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (lastName != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("lastName")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(lastName, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (email != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("email")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(email, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (phoneNumber != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("phoneNumber")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(phoneNumber, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -293,7 +312,7 @@ namespace BankAccountOpenApiSdk.Client
             }
         }
 
-        /// <returns>Success</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual System.Threading.Tasks.Task<Customer> GetAsync(int? customerId)
         {
@@ -301,7 +320,7 @@ namespace BankAccountOpenApiSdk.Client
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Success</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<Customer> GetAsync(int? customerId, System.Threading.CancellationToken cancellationToken)
         {
@@ -316,8 +335,8 @@ namespace BankAccountOpenApiSdk.Client
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/customer/get"
-                    urlBuilder_.Append("api/customer/get");
+                    // Operation Path: "api/v1/Customer/get"
+                    urlBuilder_.Append("api/v1/Customer/get");
                     urlBuilder_.Append('?');
                     if (customerId != null)
                     {
@@ -397,7 +416,7 @@ namespace BankAccountOpenApiSdk.Client
             }
         }
 
-        /// <returns>Success</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual System.Threading.Tasks.Task<string> TestAsync()
         {
@@ -405,7 +424,7 @@ namespace BankAccountOpenApiSdk.Client
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Success</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<string> TestAsync(System.Threading.CancellationToken cancellationToken)
         {
@@ -420,8 +439,8 @@ namespace BankAccountOpenApiSdk.Client
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/customer/test"
-                    urlBuilder_.Append("api/customer/test");
+                    // Operation Path: "api/v1/Customer/test"
+                    urlBuilder_.Append("api/v1/Customer/test");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -515,8 +534,8 @@ namespace BankAccountOpenApiSdk.Client
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/customeraccountcard/list"
-                    urlBuilder_.Append("api/customeraccountcard/list");
+                    // Operation Path: "api/v1/CustomerAccountCard/list"
+                    urlBuilder_.Append("api/v1/CustomerAccountCard/list");
                     urlBuilder_.Append('?');
                     if (customerId != null)
                     {
@@ -593,7 +612,7 @@ namespace BankAccountOpenApiSdk.Client
             }
         }
 
-        /// <returns>Success</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual System.Threading.Tasks.Task<string> Test2Async()
         {
@@ -601,7 +620,7 @@ namespace BankAccountOpenApiSdk.Client
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Success</returns>
+        /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<string> Test2Async(System.Threading.CancellationToken cancellationToken)
         {
@@ -616,8 +635,8 @@ namespace BankAccountOpenApiSdk.Client
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                     if (!string.IsNullOrEmpty(_baseUrl)) urlBuilder_.Append(_baseUrl);
-                    // Operation Path: "api/customeraccountcard/test"
-                    urlBuilder_.Append("api/customeraccountcard/test");
+                    // Operation Path: "api/v1/CustomerAccountCard/test"
+                    urlBuilder_.Append("api/v1/CustomerAccountCard/test");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
