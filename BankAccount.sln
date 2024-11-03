@@ -29,7 +29,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankAccount.WebApi.gRPCServ
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankAccount.WebAPI.gRPCService.SmokeTest", "BankAccount.WebAPI.gRPCSservice.SmokeTest\BankAccount.WebAPI.gRPCService.SmokeTest.csproj", "{34E63718-4B08-4B24-974A-3E6FA0B8C2B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccount.WebApi.OpenAPI", "BankAccount.WebApi.OpenAPI\BankAccount.WebApi.OpenAPI.csproj", "{C6398D0C-9E08-41EB-ACDD-D0A835E61B64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankAccount.WebApi.OpenAPI", "BankAccount.WebApi.OpenAPI\BankAccount.WebApi.OpenAPI.csproj", "{C6398D0C-9E08-41EB-ACDD-D0A835E61B64}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankAccount.WebApi.OpenAPI.Sdk", "BankAccount.WebApi.OpenAPI.Sdk\BankAccount.WebApi.OpenAPI.Sdk.csproj", "{272865C9-48B5-4D2A-8DD9-38CB0B93A083}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankAccount.WebApi.OpenAPI.SmokeTest", "BankAccount.WebApi.OpenAPI.SmokeTest\BankAccount.WebApi.OpenAPI.SmokeTest.csproj", "{5FA409EB-E233-4117-8574-57810FAC72B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,6 +74,14 @@ Global
 		{C6398D0C-9E08-41EB-ACDD-D0A835E61B64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6398D0C-9E08-41EB-ACDD-D0A835E61B64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6398D0C-9E08-41EB-ACDD-D0A835E61B64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{272865C9-48B5-4D2A-8DD9-38CB0B93A083}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{272865C9-48B5-4D2A-8DD9-38CB0B93A083}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{272865C9-48B5-4D2A-8DD9-38CB0B93A083}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{272865C9-48B5-4D2A-8DD9-38CB0B93A083}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FA409EB-E233-4117-8574-57810FAC72B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FA409EB-E233-4117-8574-57810FAC72B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FA409EB-E233-4117-8574-57810FAC72B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FA409EB-E233-4117-8574-57810FAC72B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +94,7 @@ Global
 		{E8EBB70B-6315-41FA-B063-C95172D2082A} = {CD31730D-AA64-4F80-960E-E8291B9C9981}
 		{34E63718-4B08-4B24-974A-3E6FA0B8C2B3} = {CD31730D-AA64-4F80-960E-E8291B9C9981}
 		{C6398D0C-9E08-41EB-ACDD-D0A835E61B64} = {24EEB1CB-906D-4517-B7D2-E71378A25E2D}
+		{5FA409EB-E233-4117-8574-57810FAC72B7} = {CD31730D-AA64-4F80-960E-E8291B9C9981}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EE928B6B-0136-4BBE-8971-A05858561EEE}

@@ -58,13 +58,20 @@
     <Folder Include="Properties" />
     <Folder Include="Tables" />
     <Folder Include="PostDeploy" />
+    <Folder Include="Scripts" />
+    <Folder Include="Procedures" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Customer.sql" />
     <PostDeploy Include="PostDeploy\PostDeploy_20240927.sql" />
     <Build Include="Tables\Account.sql" />
+    <Build Include="Tables\DebitCard.sql" />
+    <Build Include="Procedures\ListCustomerAccountCardAsync.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\AccountTransaction.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\Scripts.sql" />
   </ItemGroup>
 </Project>

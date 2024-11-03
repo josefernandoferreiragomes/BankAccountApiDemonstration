@@ -17,7 +17,7 @@ namespace BankAccount.WebApi.BL
 
 
         // Update customer details
-        public Task UpdateCustomerAsync(int customerId, string firstName, string lastName, string email, string phoneNumber);
+        public Task<Customer> UpdateCustomerAsync(int customerId, string firstName, string lastName, string email, string phoneNumber);
 
 
         // Delete a customer
@@ -26,6 +26,7 @@ namespace BankAccount.WebApi.BL
 
         // Get all customers
         public Task<IEnumerable<Customer>> GetAllCustomersAsync();
-       
+
+        public IEnumerable<CustomerAccountCard> ListCustomerAccountCardAsync(int customerId);
     }
 }

@@ -50,11 +50,42 @@ Currently initiating the OpenAPI project
 	Install-Package Grpc.Tools
 	```
 	2. copy the protos and configure them to generate client only  
+
 13. Create NUnit test project
 	1. install moq
 	```bash
 	install-package moq
 	```
+	2. configure easy grpc method discovery
+	```bash
+	dotnet add package Grpc.AspNetCore.Server.Reflection --version 2.66.0
+	 ```
+	3. with chocolatey install go 
+	```bash
+	choco install go
+	```
+	4. install from go
+	```bash
+	go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest
+	```
+	5. restart the machine
+	6. describe the service:
+	```bash
+	grpcurl localhost:32770 describe
+	```
+	7. test one method in the command line
+	```bash
+	grpcurl -d '{\"Name\": 13234 }' localhost:32771 greet.Greeter/SayHello
+	```
+	8. install grpcui
+	```bash
+	go install github.com/fullstorydev/grpcui/cmd/grpcui@latest
+	```
+	9. open grpcui
+	```bash
+	grpcui localhost:32771
+	```
+	
 14. Configure sql server express
 	1. create user dockerUser mypass
 	2. Open SQL Server Configuration Manager and Enable TCP/IP in Server Network Configuration 
@@ -68,8 +99,24 @@ Currently initiating the OpenAPI project
 	1. Open SQL Server Management Studio (SSMS).
 	1. Connect to the Server. Right-click on the Server and choose Properties. Go to the Security tab.
 	1. Ensure that SQL Server and Windows Authentication Mode is selected. Restart SQL Server for the changes to take effect.
-	 
+	1. start sql server browser 
 	
+15. create openApi project as another exposure tachnology, using the remaining BL and DAL
+	1. in case swagger does not open (the port might change)
+	https://localhost:32773/swagger/index.html
+16. create sdk project
+	1. add newtonsoft.json
+	```bash
+	dotnet add package Newtonsoft.Json
+	```
+	1. Generate client sdk. 
+	1.1. Execute in Sdk project folder
+	```bash
+	   nswag openapi2csclient /input:https://localhost:32771/swagger/v1/swagger.json /classname:BankAccountOpenApiSdk /namespace:BankAccountOpenApiV1Sdk.Client /output:BankAccountOpenApiV1Sdk.cs
+	   nswag openapi2csclient /input:https://localhost:32771/swagger/v2/swagger.json /classname:BankAccountOpenApiSdk /namespace:BankAccountOpenApiV2Sdk.Client /output:BankAccountOpenApiV2Sdk.cs
+	```
+17. create nunit smoke test
+	1. 
 #### Notice the ports are still dynaic and must be updated in the smoke test, until configuration for fixed port is made
 
 #### Install entity framework support for migrations (optional)
@@ -87,6 +134,10 @@ Primary constructor
 
 https://devblogs.microsoft.com/dotnet/csharp-primary-constructors-refactoring/
 
+Configure service method discovery
+
+https://learn.microsoft.com/en-us/aspnet/core/grpc/test-tools?view=aspnetcore-8.0
+
 ### Miscellaneous
 Script executed when getting clients from entity framework in sql server
 ```sql
@@ -103,3 +154,153 @@ https://learn.microsoft.com/en-us/aspnet/core/tutorials/grpc/grpc-start?view=asp
 
 gRPC vs REST vs OpenAPI
 https://cloud.google.com/blog/products/api-management/understanding-grpc-openapi-and-rest-and-when-to-use-them
+
+### Api Versioning
+
+Install package onto OpenApi project
+```bash
+Install-Package Asp.Versioning.Mvc -Version 8.1.0
+Install-Package Asp.Versioning.Mvc.ApiExplorer -Version 8.1.0
+Install-Package Swashbuckle.AspNetCore -Version 6.9.0
+```
+
+https://weblogs.asp.net/ricardoperes/asp-net-core-api-versioning
+https://code-maze.com/aspnetcore-api-versioning/
+https://medium.com/@seldah/managing-multiple-versions-of-your-api-with-net-and-swagger-47b4143e8bf5
+
+
+### Set up ELK
+Set up a .NET API application that logs to Serilog, views logs in Kibana, and uses Grafana for monitoring on your local machine
+
+#### Add Serilog to Your Project
+```bash
+dotnet add package Serilog.AspNetCore
+dotnet add package Serilog.Sinks.Http
+
+```
+#### Configure Serilog in your Program.cs
+```csharp
+using Serilog;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Configure Serilog
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Http("http://localhost:8080") // Logstash endpoint
+    .CreateLogger();
+
+builder.Host.UseSerilog();
+
+var app = builder.Build();
+
+app.MapGet("/", () => "Hello World!");
+
+app.Run();
+```
+
+#### Set Up ELK
+
+Option A: Clone
+
+Clone elk from git
+```bash
+git clone https://github.com/deviantony/docker-elk.git
+cd docker-elk
+
+```
+
+Add in default logstash configuration
+```yml
+http {
+		port => 8080
+	}
+```
+
+Docker start elk
+```bash
+docker compose up setup
+
+docker compose up
+
+# docker-compose up -d
+```
+
+Open kibana in browser 
+http://localhost:5601
+
+docker stop elk
+```bash
+docker-compose down -v
+```
+
+test logstash in postman
+url: http://localhost:9200/_cat/indices?v
+Auth basic
+	username: elastic
+	password: changeme
+
+#### Other configurations
+Set environment variable
+```bash
+$env:KIBANA_SYSTEM_PASSWORD="your_password"
+```
+
+User and pass default
+username: elastic
+password: changeme
+
+### References
+
+https://www.elastic.co/guide/en/logstash/current/docker.html
+
+https://learn.microsoft.com/en-us/dotnet/architecture/cloud-native/logging-with-elastic-stack
+
+
+### Troubleshoot
+
+logstash.conf
+	input {
+		beats {
+			port => 5044
+		}
+
+		tcp {
+			port => 50000
+		}
+
+		http {
+			port => 8080
+		}
+	}
+
+	## Add your filters / logstash plugins configuration here
+
+	output {
+		elasticsearch {
+			hosts => "elasticsearch:9200"
+			user => "logstash_internal"
+			password => "${LOGSTASH_INTERNAL_PASSWORD}"
+			index => "loanapp-logs-%{+YYYY.MM.dd}"
+		}
+	}
+
+search existing containers
+	docker container ls
+
+curl test command
+	run command from container with 
+		docker exec -it a36f9decf5c9 /bin/bash
+		
+
+run command:
+	curl -X POST "http://localhost:8080" -H "Content-Type: application/json" -d '{"message": "test log"}' --user elastic:changeme
+	curl -X POST "http://localhost:8080" -H "Content-Type: application/json" -d '{"message": "test log"}' -u logstash_internal:changeme
+	curl -X POST "http://localhost:8080" -H "Content-Type: application/json" -d '{"message": "test log"}' -u test_log:test_logpassword
+	curl -X POST "http://localhost:8080" -H "Content-Type: application/json" -d '{"message": "test log"}' --user test_log:test_logpassword
+
+Index management => create index loanapp-logs
+http://localhost:5601/app/discover#/?_g=(filters:!(),refreshInterval:(pause:!t,value:60000),time:(from:now-15m,to:now))&_a=(columns:!(),dataSource:(dataViewId:'83250184-2d73-4e8a-b4ea-15435f9396b3',type:dataView),filters:!(),interval:auto,query:(language:kuery,query:''),sort:!())
+
+kibana test console
+http://localhost:5601/app/dev_tools#/console?load_from=data:text/plain,AoeQygKgBA+gRgVwDYGsD8AHATgUwC54CeAUAN5QBEAlgHYAmOAHhVAFxTkUy0PNuVIA9gEMawjBgC0QgOYBnFgF8oishTEBbHBXYUAZoMEUANJTxU8SbbrjCsFVUA
+

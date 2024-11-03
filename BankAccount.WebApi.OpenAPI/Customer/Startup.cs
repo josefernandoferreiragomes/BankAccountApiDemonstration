@@ -10,7 +10,7 @@ namespace BankAccount.WebApi.OpenAPI.Features
     {
         public static void AddCustomerServices(this IServiceCollection services, IConfiguration configuration)
         {
-            string connectionString = configuration.GetConnectionString("BankAccountDb");
+            string connectionString = configuration.GetConnectionString("BankAccountDb") ?? "";
             // Register DbContext, Repositories, and Business Services
             services.AddDbContext<BankAccountContext>(options =>
                 options.UseSqlServer(connectionString));
