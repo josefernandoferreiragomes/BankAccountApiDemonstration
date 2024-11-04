@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Diagnostics;
 using Asp.Versioning;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 
 namespace BankAccount.WebApi.OpenAPI.Features.Customer.Controllers;
@@ -23,18 +24,37 @@ public class CustomerV2Controller(
     ICustomerService customerService) : ControllerBase 
 {
 
-    //API versioning demonstration
-    [HttpPut, Microsoft.AspNetCore.Mvc.Route("update")]
+    [HttpGet, Microsoft.AspNetCore.Mvc.Route("get")]
     [MapToApiVersion("2.0")]
-    [ProducesResponseType<BankAccount.WebAPI.DAL.Customer>((int)HttpStatusCode.OK)]
-    [ProducesResponseType<BankAccount.WebAPI.DAL.Customer>((int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType(typeof(BankAccount.WebAPI.DAL.Customer), (int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType(typeof(BankAccount.WebAPI.DAL.Customer), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    public async Task<BankAccount.WebAPI.DAL.Customer> CustomerUpdateV2(int customerId, string firstName, string lastName, string email, string phoneNumber)
+    public async Task<Results<Ok<BankAccount.WebAPI.DAL.Customer>, BadRequest<string>>> CustomerGetV2(int customerId)
     {
         using var _ = logger.BeginScope($"[CustomerId={customerId}");
-        var response = await customerService.UpdateCustomerAsync(customerId, firstName, lastName, email, phoneNumber);
+        var response = await customerService.GetCustomerByIdAsync(customerId);
 
-        return response;
+        return TypedResults.Ok(response);
+    }
+
+    /// <summary>
+    /// Updates a customer.
+    /// </summary>
+    /// <param name="customer">The customer object.</param>
+    [HttpPut, Microsoft.AspNetCore.Mvc.Route("update")]
+    [MapToApiVersion("2.0")]    
+    [ProducesResponseType(typeof(BankAccount.WebAPI.DAL.Customer), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(BankAccount.WebAPI.DAL.Customer), (int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    public async Task<Results<Ok<BankAccount.WebAPI.DAL.Customer>, BadRequest<string>>> CustomerUpdateV2([FromBody] BankAccount.WebAPI.DAL.Customer customer)
+    {
+        using var _ = logger.BeginScope($"[CustomerId={customer.CustomerId}");
+        var response = await customerService.UpdateCustomerAsync(customer);
+        if (response == null)
+        {
+            return TypedResults.BadRequest("Unable to update customer.");
+        }
+        return TypedResults.Ok(response);
     }
 
 }

@@ -21,9 +21,8 @@ namespace BankAccount.WebApi.OpenAPI.SmokeTest
             Console.WriteLine("----> Client initialized !!!");
 
             HttpClient httpClient = new HttpClient();
-            
-            _bankingV1Client = new BankAccountOpenApiV1Sdk.Client.BankAccountOpenApiSdk("https://localhost:32775/", httpClient);
-            _bankingV2Client = new BankAccountOpenApiV2Sdk.Client.BankAccountOpenApiSdk("https://localhost:32775/", httpClient);
+                        
+            _bankingV2Client = new BankAccountOpenApiV2Sdk.Client.BankAccountOpenApiSdk("https://localhost:8443/", httpClient);
         }
 
        
@@ -32,11 +31,11 @@ namespace BankAccount.WebApi.OpenAPI.SmokeTest
         {
             // Arrange
             var customerId = 1;
-            var customer = await _bankingV1Client.GetAsync(customerId);
+            var customer = await _bankingV2Client.GetAsync(customerId);
             customer.FirstName = "updated first name";
 
             // Act
-            var customerResponse = await _bankingV2Client.UpdateAsync(customer.CustomerId, customer.FirstName, customer.LastName, customer.Email, customer.PhoneNumber);
+            var customerResponse = await _bankingV2Client.UpdateAsync(customer);
             
             // Assert
             Assert.That(customerResponse is not null);

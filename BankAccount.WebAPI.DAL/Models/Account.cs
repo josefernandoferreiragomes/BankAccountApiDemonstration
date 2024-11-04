@@ -19,8 +19,8 @@ namespace BankAccount.WebAPI.DAL
         public DateTime UpdatedAt { get; set; }
 
         // Navigation properties
-        public Customer Customer { get; set; }
-        public ICollection<AccountTransaction> AccountTransactions { get; set; }
+        //public Customer? Customer { get; set; }
+        public ICollection<AccountTransaction>? AccountTransactions { get; set; }
     }
 
 }

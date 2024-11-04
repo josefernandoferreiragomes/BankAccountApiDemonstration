@@ -17,9 +17,9 @@ namespace BankAccount.WebAPI.DAL
         {
             // Configure relationships
             modelBuilder.Entity<Customer>()
-                .HasMany(c => c.Accounts)
-                .WithOne(a => a.Customer)
-                .HasForeignKey(a => a.CustomerId);
+                .HasMany(c => c.Accounts);
+                //.WithOne(a => a.Customer)
+                //.HasForeignKey(a => a.CustomerId);
 
             modelBuilder.Entity<Account>()
                 .HasMany(a => a.AccountTransactions)

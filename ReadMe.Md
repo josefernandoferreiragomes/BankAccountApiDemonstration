@@ -112,8 +112,10 @@ Currently initiating the OpenAPI project
 	1. Generate client sdk. 
 	1.1. Execute in Sdk project folder
 	```bash
-	   nswag openapi2csclient /input:https://localhost:32771/swagger/v1/swagger.json /classname:BankAccountOpenApiSdk /namespace:BankAccountOpenApiV1Sdk.Client /output:BankAccountOpenApiV1Sdk.cs
-	   nswag openapi2csclient /input:https://localhost:32771/swagger/v2/swagger.json /classname:BankAccountOpenApiSdk /namespace:BankAccountOpenApiV2Sdk.Client /output:BankAccountOpenApiV2Sdk.cs
+	   del BankAccountOpenApiV1Sdk.cs
+	   del BankAccountOpenApiV2Sdk.cs
+	   nswag openapi2csclient /input:https://localhost:8443/swagger/v1/swagger.json /classname:BankAccountOpenApiSdk /namespace:BankAccountOpenApiV1Sdk.Client /output:BankAccountOpenApiV1Sdk.cs
+	   nswag openapi2csclient /input:https://localhost:8443/swagger/v2/swagger.json /classname:BankAccountOpenApiSdk /namespace:BankAccountOpenApiV2Sdk.Client /output:BankAccountOpenApiV2Sdk.cs
 	```
 17. create nunit smoke test
 	1. 
@@ -168,8 +170,32 @@ https://weblogs.asp.net/ricardoperes/asp-net-core-api-versioning
 https://code-maze.com/aspnetcore-api-versioning/
 https://medium.com/@seldah/managing-multiple-versions-of-your-api-with-net-and-swagger-47b4143e8bf5
 
+### Run the smoke tests
 
-### Set up ELK
+Open one instance of visual studio with gRPCService or OpenAPI as startup project, and start the application
+
+Open another instance with one of the smoke test startup projects, and run the tests
+
+### Set default port
+Add configuration to launchSettings.json
+
+"Container (Dockerfile)": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "environmentVariables": {
+        "ASPNETCORE_HTTPS_PORTS": "8081",
+        "ASPNETCORE_HTTP_PORTS": "8080",
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://+:5000;https://+:5001" // Internal container ports
+      },
+      "httpPort": 8080, // Fixed host port for HTTP
+      "sslPort": 8443, // Fixed host port for HTTPS
+      "publishAllPorts": false,
+      "useSSL": true
+    }
+
+## Set up ELK
 Set up a .NET API application that logs to Serilog, views logs in Kibana, and uses Grafana for monitoring on your local machine
 
 #### Add Serilog to Your Project

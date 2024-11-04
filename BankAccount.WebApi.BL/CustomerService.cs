@@ -39,6 +39,24 @@ namespace BankAccount.WebApi.BL
         }
 
         // Update customer details
+        public async Task<Customer> UpdateCustomerAsync(Customer customer)
+        {
+            var customerUpdate = await _customerRepository.GetCustomerByIdAsync(customer.CustomerId);
+            if (customer == null)
+            {
+                throw new Exception("Customer not found.");
+            }
+
+            // Update fields
+            customerUpdate.FirstName = customer.FirstName;
+            customerUpdate.LastName = customer.LastName;
+            customerUpdate.Email = customer.Email;
+            customerUpdate.PhoneNumber = customer.PhoneNumber;
+
+            await _customerRepository.UpdateCustomerAsync(customerUpdate);
+            return customerUpdate;
+        }
+
         public async Task<Customer> UpdateCustomerAsync(int customerId, string firstName, string lastName, string email, string phoneNumber)
         {
             var customer = await _customerRepository.GetCustomerByIdAsync(customerId);
@@ -57,22 +75,20 @@ namespace BankAccount.WebApi.BL
             return customer;
         }
 
+
         // Delete a customer
         public async Task DeleteCustomerAsync(int customerId)
-        {
-            await _customerRepository.DeleteCustomerAsync(customerId);
-        }
+        => await _customerRepository.DeleteCustomerAsync(customerId);
+        
 
         // Get all customers
         public async Task<IEnumerable<Customer>> GetAllCustomersAsync()
-        {
-            return await _customerRepository.GetAllCustomersAsync();
-        }
+        => await _customerRepository.GetAllCustomersAsync();
+        
 
         public IEnumerable<CustomerAccountCard> ListCustomerAccountCardAsync(int customerId)
-        {
-            return _customerRepository.ListCustomerAccountCardAsync(customerId);
-        }
+        => _customerRepository.ListCustomerAccountCardAsync(customerId);
+        
     }
 
 }

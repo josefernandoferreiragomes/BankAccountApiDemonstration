@@ -1,8 +1,10 @@
 using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
 using BankAccount.WebApi.OpenAPI.Features;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using System.Reflection;
 using System.Text.Json.Serialization;
 
 
@@ -10,7 +12,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles); ;
+builder.Services.AddControllers(options =>
+    {
+        options.OutputFormatters.RemoveType<StringOutputFormatter>();
+        options.OutputFormatters.RemoveType<HttpNoContentOutputFormatter>();
+    })    
+    .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 //builder.Services.EnableInternalControllers();
 //builder.Services.AddJsonOptions(opts =>
 // {
@@ -23,6 +30,10 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "API V1", Version = "v1" });
     c.SwaggerDoc("v2", new OpenApiInfo { Title = "API V2", Version = "v2" });
+    // Ensure Swagger includes XML comments (if any)
+    //var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    //c.IncludeXmlComments(xmlPath);
 });
 
 builder.Services.AddCustomerServices(builder.Configuration);

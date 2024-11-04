@@ -21,11 +21,15 @@
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "environmentVariables": {
         "ASPNETCORE_HTTPS_PORTS": "8081",
-        "ASPNETCORE_HTTP_PORTS": "8080"
+        "ASPNETCORE_HTTP_PORTS": "8080",
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://+:9000;https://+:9001" // Internal container ports
       },
-      "publishAllPorts": true,
-      "useSSL": true,
-      "applicationUrl": "http://localhost:32778;https://localhost:32779"
+      "httpPort": 9080, // Fixed host port for HTTP
+      "sslPort": 9443, // Fixed host port for HTTPS
+      "publishAllPorts": false,
+      "useSSL": true//,
+      //"applicationUrl": "http://localhost:32778;https://localhost:32779"
     }
   },
   "$schema": "http://json.schemastore.org/launchsettings.json"
